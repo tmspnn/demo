@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <% _.forEach(tagsInHead, (tag) => { %>
+        <%= tag %>
+        <% }) %>
+        <title><%= pageTitle %></title>
+    </head>
+
+    <body>
+        <h1>index.html</h1>
+        <%= $.navbar({ aaa: "aaa blublublu ~~~" }) %>
+        <% _.forEach(tagsInBody, (tag) => { %>
+        <%= tag %>
+        <% }) %>
+        <script src="/index-1.0.0.js"></script>
+    </body>
+</html>
