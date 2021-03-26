@@ -30,14 +30,14 @@ const render = views(__dirname + "/views", {
                 const templatePath =
                     __dirname + `/views/components/${dir}/${dir}.html`;
                 const html = fs.readFileSync(templatePath, {
-                    encoding: "utf8",
+                    encoding: "utf8"
                 });
                 return _.template(html);
             })
             .value(),
         cache: isProduction,
-        dayjs,
-    },
+        dayjs
+    }
 });
 
 async function handleException(ctx, next) {
@@ -47,7 +47,7 @@ async function handleException(ctx, next) {
         ctx.status = e.status || 500;
         ctx.body = {
             err: e.message,
-            stack: isProduction ? null : e.stack,
+            stack: isProduction ? null : e.stack
         };
     }
 }
@@ -68,7 +68,7 @@ app.use(handleException)
     .use(router.allowedMethods())
     .use(async (ctx) => {
         await send(ctx, ctx.path, {
-            root: path.resolve(__dirname, "../assets"),
+            root: path.resolve(__dirname, "../assets")
         });
     });
 

@@ -23,7 +23,7 @@ module.exports = {
     output: {
         path: __dirname + "/assets",
         filename: `[name]-${version}.js`,
-        publicPath: "",
+        publicPath: ""
     },
     module: {
         rules: [
@@ -41,18 +41,18 @@ module.exports = {
                                         "postcss-import",
                                         {
                                             path: [
-                                                __dirname + "/src/views/styles",
-                                            ],
-                                        },
+                                                __dirname + "/src/views/styles"
+                                            ]
+                                        }
                                     ],
                                     precss,
                                     colorFunction,
-                                    autoprefixer,
-                                ],
-                            },
-                        },
-                    },
-                ],
+                                    autoprefixer
+                                ]
+                            }
+                        }
+                    }
+                ]
             },
             {
                 test: /\.m?js$/,
@@ -61,25 +61,25 @@ module.exports = {
                     loader: "babel-loader",
                     options: {
                         presets: [
-                            ["@babel/preset-env", { targets: "defaults" }],
+                            ["@babel/preset-env", { targets: "defaults" }]
                         ],
                         plugins: [
                             [
                                 "@babel/plugin-proposal-class-properties",
-                                { loose: true },
-                            ],
-                        ],
-                    },
-                },
-            },
-        ],
+                                { loose: true }
+                            ]
+                        ]
+                    }
+                }
+            }
+        ]
     },
     resolve: {
         alias: {
             "@components": __dirname + "/src/views/components",
-            "@util": __dirname + "/src/views/util",
+            "@util": __dirname + "/src/views/util"
         },
-        extensions: [".js", ".json"],
+        extensions: [".js", ".json"]
     },
     devtool: isProduction ? "nosources-source-map" : "cheap-module-source-map",
     plugins: [
@@ -97,12 +97,12 @@ module.exports = {
             cloneNode: ["@util/DOM", "cloneNode"],
             replaceNode: ["@util/DOM", "replaceNode"],
             clearNode: ["@util/DOM", "clearNode"],
-            html2DOM: ["@util/DOM", "html2DOM"],
+            html2DOM: ["@util/DOM", "html2DOM"]
         }),
         ...pages.map(
             () =>
                 new MiniCssExtractPlugin({ filename: `[name]-${version}.css` })
-        ),
+        )
     ],
-    watchOptions: { ignored: ["node_modules/**"] },
+    watchOptions: { ignored: ["node_modules/**"] }
 };

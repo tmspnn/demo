@@ -3,7 +3,7 @@ module.exports = function pageController(router) {
         const data = {
             pageTitle: "Home",
             tagsInHead: [],
-            tagsInBody: [],
+            tagsInBody: []
         };
         await ctx.render("pages/index/index.html", data);
     });
