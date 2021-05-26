@@ -1,14 +1,12 @@
-// Env & version
+// Environment and version
 const isProduction = process.env.NODE_ENV == "production";
 const version = require("./package.json").version;
-const _ = require("lodash");
 
-// Plugins
+// External modules
+const _ = require("lodash");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const autoprefixer = require("autoprefixer");
-const colorFunction = require("postcss-color-function");
-const precss = require("precss");
+
 
 // Pages
 const pages = ["index"];
@@ -21,7 +19,7 @@ module.exports = {
         .value(),
     mode: isProduction ? "production" : "development",
     output: {
-        path: __dirname + "/assets",
+        path: __dirname + "/build",
         filename: `[name]-${version}.js`,
         publicPath: ""
     },
@@ -39,15 +37,10 @@ module.exports = {
                                 plugins: [
                                     [
                                         "postcss-import",
-                                        {
-                                            path: [
-                                                __dirname + "/src/views/styles"
-                                            ]
-                                        }
+                                        { path: ["src/views/styles"] }
                                     ],
-                                    precss,
-                                    colorFunction,
-                                    autoprefixer
+                                    "autoprefixer",
+                                    "precss"
                                 ]
                             }
                         }
@@ -67,6 +60,10 @@ module.exports = {
                             [
                                 "@babel/plugin-proposal-class-properties",
                                 { loose: true }
+                            ],
+                            [
+                                "@babel/plugin-proposal-private-methods",
+                                { loose: true }
                             ]
                         ]
                     }
@@ -77,27 +74,28 @@ module.exports = {
     resolve: {
         alias: {
             "@components": __dirname + "/src/views/components",
-            "@util": __dirname + "/src/views/util"
+            "@helpers": __dirname + "/src/views/helpers"
         },
         extensions: [".js", ".json"]
     },
-    devtool: isProduction ? "nosources-source-map" : "cheap-module-source-map",
+    devtool: "source-map",
     plugins: [
         new webpack.ProvidePlugin({
             _: "lodash",
-            View: ["@components/vc", "View"],
-            Controller: ["@components/vc", "Controller"],
-            isJSON: ["@util/isJSON", "default"],
-            $: ["@util/DOM", "$"],
-            $$: ["@util/DOM", "$$"],
-            addClass: ["@util/DOM", "addClass"],
-            removeClass: ["@util/DOM", "removeClass"],
-            toggleClass: ["@util/DOM", "toggleClass"],
-            hasClass: ["@util/DOM", "hasClass"],
-            cloneNode: ["@util/DOM", "cloneNode"],
-            replaceNode: ["@util/DOM", "replaceNode"],
-            clearNode: ["@util/DOM", "clearNode"],
-            html2DOM: ["@util/DOM", "html2DOM"]
+            kxhr: ["k-xhr", "default"],
+            $: ["k-dom", "$"],
+            $$: ["k-dom", "$$"],
+            addClass: ["k-dom", "addClass"],
+            removeClass: ["k-dom", "removeClass"],
+            clearNode: ["k-dom", "clearNode"],
+            removeNode: ["k-dom", "removeNode"],
+            isInt: ["k-util", "isInt"],
+            isJSON: ["k-util", "isJSON"],
+            parseJSON: ["k-util", "parseJSON"],
+            at: ["k-util", "at"],
+            toArray: ["k-util", "toArray"],
+            each: ["k-util", "each"],
+            at: ["k-util", "at"]
         }),
         ...pages.map(
             () =>

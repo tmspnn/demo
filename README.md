@@ -1,2 +1,3 @@
-# demo
-A NodeJS demo with templates and rest API.
+# node-boilerplate
+
+A NodeJS boilerplate with templates and rest API.

@@ -68,7 +68,7 @@ app.use(handleException)
     .use(router.allowedMethods())
     .use(async (ctx) => {
         await send(ctx, ctx.path, {
-            root: path.resolve(__dirname, "../assets")
+            root: path.resolve(__dirname, "../build")
         });
     });
 
