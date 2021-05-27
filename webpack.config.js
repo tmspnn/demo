@@ -7,7 +7,6 @@ const _ = require("lodash");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-
 // Pages
 const pages = ["index"];
 
@@ -92,7 +91,6 @@ module.exports = {
             isInt: ["k-util", "isInt"],
             isJSON: ["k-util", "isJSON"],
             parseJSON: ["k-util", "parseJSON"],
-            at: ["k-util", "at"],
             toArray: ["k-util", "toArray"],
             each: ["k-util", "each"],
             at: ["k-util", "at"]
