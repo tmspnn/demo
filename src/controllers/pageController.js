@@ -13,7 +13,7 @@ const templateFn = _(readdirSync(viewRoot + "/pages"))
 			encoding: "utf8"
 		});
 
-		return ejs.compile(html, { root: viewRoot, rmWhitespace: true });
+		return ejs.compile(html, { root: viewRoot });
 	})
 	.value();
 
