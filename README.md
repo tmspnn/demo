@@ -1,3 +1,3 @@
 # node-boilerplate
 
-A NodeJS boilerplate with templates and rest API.
+A boilerplate for building RESTful APIs with Node.js.
