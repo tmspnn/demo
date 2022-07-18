@@ -9,6 +9,8 @@ import ip from "koa-ip";
 import send from "koa-send";
 import pkgJSON from "../package.json" assert { type: "json" };
 import exceptionHandler from "./middlewares/exceptionHandler.js";
+import redisClient from "./middlewares/redisClient";
+import db from "./middlewares/db";
 import pageController from "./controllers/pageController.js";
 
 const isProduction = process.env.NODE_ENV == "production";
@@ -24,6 +26,8 @@ app.use(exceptionHandler({ isProduction, pwd, version }))
 	.use(helmet())
 	.use(cors())
 	.use(koaBody())
+	.use(redisClient)
+	.use(db)
 	.use(router.routes())
 	.use(router.allowedMethods())
 	.use(async (ctx) => {

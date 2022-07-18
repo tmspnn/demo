@@ -2,8 +2,9 @@ import process from "node:process";
 
 process.on("uncaughtException", (e) => {
 	console.error(
-		"|--> uncaughtException <--|\n",
-		e.stack || e.message || e.toString()
+		"\n--> uncaughtException <--\n",
+		e.stack || e.message || e.toString(),
+		"\n\n"
 	);
 	process.exit(1);
 });
@@ -22,10 +23,15 @@ export default function (options) {
 			ctx.state.version = options.version;
 			await next();
 		} catch (e) {
+			console.error(
+				"\n--> Error <--\n",
+				e.stack || e.message || e.toString(),
+				"\n\n"
+			);
 			ctx.status = e.status || 500;
 			ctx.body = {
 				err: e.message,
-				stack: options.isProduction ? null : e.stack
+				stack: options.isProduction ? undefined : e.stack
 			};
 		}
 	};
